@@ -15,19 +15,22 @@
     <title>Music Quiz</title>
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="jumbotron">
+    <div class="container-fluid min-vh-100 d-flex align-items-start px-5 col-8">
+      <div class="jumbotron w-100 text-center">
         <h3>The Music Quiz!</h3>
         <p>Test your knowledge of music and instruments</p>
         <button type="button" class="btn btn-info startBtn">Start Quiz</button>
       </div>
 
-      <div class="hidden questionCard container-fluid" id="questionCard">
-        <p class="questionText">
+      <div
+        class="hidden questionCard container-fluid w-100 p-4 bg-info"
+        id="questionCard"
+      >
+        <h3 class="questionText">
           Question: Lorem ipsum dolor, sit amet consectetur adipisicing elit.
           Corporis suscipit, sed minus voluptatibus debitis laborum reiciendis
           sint ratione labore molestiae!
-        </p>
+        </h3>
         <div class="btn-group-vertical" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-secondary answerOne">
             Answer1
