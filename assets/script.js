@@ -1,5 +1,13 @@
-//array of objects
+//variables that reference the question and answers(buttons) to populate with object data
+var qText = $(".questionText");
+var aOne = $(".answerOne");
+var aTwo = $(".answerTwo");
+var aThree = $(".answerThree");
+var aFour = $(".answerFour");
+var startBtn = $(".startBtn");
+// var choice;
 
+//array of objects (questions with answers)
 var questions = [
   {
     question: "How many strings are on a guitar?",
@@ -67,12 +75,83 @@ var questions = [
     },
   },
 ];
+// //replaces Lorem with question text
+// qText.text(questions[0].question);
+// //adds answer text to buttons
+// aOne.text(questions[0].answers.a.answer);
+// aTwo.text(questions[0].answers.b.answer);
+// aThree.text(questions[0].answers.c.answer);
+// aFour.text(questions[0].answers.d.answer);
 
-console.log(questions[1].answers.a.answer); //logs 12
+// console.log(questions[1].answers.a.answer); //logs 12
 
-var startBtn = $(".startBtn");
+//declare funtion to pick an object from the array and return it (to use in the other function)
+function questionChooser() {
+  var randomQ = questions[Math.floor(Math.random() * questions.length)];
+  //   console.log(randomQ);
+
+  //   qText.text(randomQ.question);
+  //   aOne.text(randomQ.answers.a.answer);
+  //   aTwo.text(randomQ.answers.b.answer);
+  //   aThree.text(randomQ.answers.c.answer);
+  //   aFour.text(randomQ.answers.d.answer);
+  return randomQ;
+}
+//declares function to check if clicked answer is truthy
+// function isTruthy(event) {
+//   event.preventDefault();
+//   console.log(choice);
+// }
 
 startBtn.on("click", function () {
+  //hides start screen
   $("div.jumbotron").hide();
+  var choice = questionChooser();
+  //   console.log(questionChooser());
+
+  qText.text(choice.question);
+  aOne.text(choice.answers.a.answer);
+  aTwo.text(choice.answers.b.answer);
+  aThree.text(choice.answers.c.answer);
+  aFour.text(choice.answers.d.answer);
+
+  aOne.on("click", function (event) {
+    event.preventDefault();
+
+    if (choice.answers.a.value) {
+      console.log("true!!"); //go to next question and add 1 to score (out of 7 Qs)
+    } else {
+      console.log("false!!"); //also subtract time and go to next question
+    }
+  });
+  aTwo.on("click", function (event) {
+    event.preventDefault();
+
+    if (choice.answers.b.value) {
+      console.log("true!!"); //go to next question and add 1 to score (out of 7 Qs)
+    } else {
+      console.log("false!!"); //also subtract time and go to next question
+    }
+  });
+  aThree.on("click", function (event) {
+    event.preventDefault();
+
+    if (choice.answers.c.value) {
+      console.log("true!!"); //go to next question and add 1 to score (out of 7 Qs)
+    } else {
+      console.log("false!!"); //also subtract time and go to next question
+    }
+  });
+  aFour.on("click", function (event) {
+    event.preventDefault();
+
+    if (choice.answers.d.value) {
+      console.log("true!!"); //go to next question and add 1 to score (out of 7 Qs)
+    } else {
+      console.log("false!!"); //also subtract time and go to next question
+    }
+  });
+
+  //shows question w/answers
   $("#questionCard").removeClass("hidden");
 });
