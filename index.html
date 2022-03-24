@@ -16,7 +16,7 @@
   </head>
   <body>
     <div class="container-fluid min-vh-100 d-flex align-items-start px-5 col-8">
-      <div class="jumbotron w-100 text-center">
+      <div class="jumbotron w-100 text-center" id="jumboStart">
         <h3>The Music Quiz!</h3>
         <p>Test your knowledge of music and instruments</p>
         <button type="button" class="btn btn-info startBtn">Start Quiz</button>
@@ -45,6 +45,26 @@
             Answer4
           </button>
         </div>
+      </div>
+      <div
+        class="hidden jumbotron w-100 text-center scoreboard"
+        id="scoreboard"
+      >
+        <h2>GOOD JOB!</h2>
+        <form>
+          <div class="form-group">
+            <label for="initials">Enter your initials for the scoreboard</label>
+            <input
+              type="text"
+              class="form-control"
+              id="initials"
+              aria-describedby="playerInitials"
+              placeholder="Enter initials"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-info">Submit</button>
+        </form>
       </div>
     </div>
 

@@ -1,3 +1,7 @@
+//takes focus off the button when un-clicking
+$(".btn").mouseup(function () {
+  $(this).blur();
+});
 //variables that reference the question and answers(buttons) to populate with object data
 var qText = $(".questionText");
 var aOne = $(".answerOne");
@@ -5,7 +9,7 @@ var aTwo = $(".answerTwo");
 var aThree = $(".answerThree");
 var aFour = $(".answerFour");
 var startBtn = $(".startBtn");
-// var choice;
+var choice;
 
 //array of objects (questions with answers)
 var questions = [
@@ -75,83 +79,93 @@ var questions = [
     },
   },
 ];
-// //replaces Lorem with question text
-// qText.text(questions[0].question);
-// //adds answer text to buttons
-// aOne.text(questions[0].answers.a.answer);
-// aTwo.text(questions[0].answers.b.answer);
-// aThree.text(questions[0].answers.c.answer);
-// aFour.text(questions[0].answers.d.answer);
 
-// console.log(questions[1].answers.a.answer); //logs 12
-
-//declare funtion to pick an object from the array and return it (to use in the other function)
-function questionChooser() {
-  var randomQ = questions[Math.floor(Math.random() * questions.length)];
-  //   console.log(randomQ);
-
-  //   qText.text(randomQ.question);
-  //   aOne.text(randomQ.answers.a.answer);
-  //   aTwo.text(randomQ.answers.b.answer);
-  //   aThree.text(randomQ.answers.c.answer);
-  //   aFour.text(randomQ.answers.d.answer);
-  return randomQ;
+// console.log(questions);
+function scoreboard() {
+  //"ALL DONE!" *Show score *enter initials
+  //hide questionCard
+  $("div.questionCard").hide();
+  //show scoreboard
+  $("#scoreboard").removeClass("hidden");
 }
-//declares function to check if clicked answer is truthy
-// function isTruthy(event) {
-//   event.preventDefault();
-//   console.log(choice);
-// }
 
-startBtn.on("click", function () {
+//pops() an object from questions and places the data into Q&A buttons
+function questionAnswerFill() {
+  //if questions array is empty, show scoreboard. Else, fill next Q&As
+  if (questions.length === 0) {
+    console.log("scoreboard time");
+    scoreboard();
+  } else {
+    choice = questions.pop();
+
+    qText.text(choice.question);
+    aOne.text(choice.answers.a.answer);
+    aTwo.text(choice.answers.b.answer);
+    aThree.text(choice.answers.c.answer);
+    aFour.text(choice.answers.d.answer);
+  }
+}
+
+function init() {
   //hides start screen
-  $("div.jumbotron").hide();
-  var choice = questionChooser();
-  //   console.log(questionChooser());
+  $("#jumboStart").hide();
 
-  qText.text(choice.question);
-  aOne.text(choice.answers.a.answer);
-  aTwo.text(choice.answers.b.answer);
-  aThree.text(choice.answers.c.answer);
-  aFour.text(choice.answers.d.answer);
-
+  //shuffles [questions]
+  questions.sort(function () {
+    return 0.5 - Math.random();
+  });
+  //fills the first Q&As
+  questionAnswerFill();
+  //listens for click on 1st button
   aOne.on("click", function (event) {
     event.preventDefault();
 
     if (choice.answers.a.value) {
-      console.log("true!!"); //go to next question and add 1 to score (out of 7 Qs)
+      console.log("true!!");
+      questionAnswerFill();
     } else {
-      console.log("false!!"); //also subtract time and go to next question
+      console.log("false!!");
+      questionAnswerFill();
     }
   });
+  //listens for click on 2nd button
   aTwo.on("click", function (event) {
     event.preventDefault();
 
     if (choice.answers.b.value) {
-      console.log("true!!"); //go to next question and add 1 to score (out of 7 Qs)
+      console.log("true!!");
+      questionAnswerFill();
     } else {
-      console.log("false!!"); //also subtract time and go to next question
+      console.log("false!!");
+      questionAnswerFill();
     }
   });
+  //listens for click on 3rd button
   aThree.on("click", function (event) {
     event.preventDefault();
 
     if (choice.answers.c.value) {
-      console.log("true!!"); //go to next question and add 1 to score (out of 7 Qs)
+      console.log("true!!");
+      questionAnswerFill();
     } else {
-      console.log("false!!"); //also subtract time and go to next question
+      console.log("false!!");
+      questionAnswerFill();
     }
   });
+  //listens for click on 4th button
   aFour.on("click", function (event) {
     event.preventDefault();
 
     if (choice.answers.d.value) {
-      console.log("true!!"); //go to next question and add 1 to score (out of 7 Qs)
+      console.log("true!!");
+      questionAnswerFill();
     } else {
-      console.log("false!!"); //also subtract time and go to next question
+      console.log("false!!");
+      questionAnswerFill();
     }
   });
 
   //shows question w/answers
   $("#questionCard").removeClass("hidden");
-});
+}
+startBtn.on("click", init);
