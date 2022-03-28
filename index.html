@@ -16,12 +16,13 @@
   </head>
   <body>
     <div class="container-fluid min-vh-100 d-flex align-items-start px-5 col-8">
+      <!-- start screen -->
       <div class="jumbotron w-100 text-center" id="jumboStart">
         <h3>The Music Quiz!</h3>
         <p>Test your knowledge of music and instruments</p>
         <button type="button" class="btn btn-info startBtn">Start Quiz</button>
       </div>
-
+      <!-- Q&A Screen -->
       <div
         class="hidden questionCard container-fluid w-100 p-4 bg-info"
         id="questionCard"
@@ -46,10 +47,8 @@
           </button>
         </div>
       </div>
-      <div
-        class="hidden jumbotron w-100 text-center scoreboard"
-        id="scoreboard"
-      >
+      <!-- Enter initials screen   -->
+      <div class="hidden jumbotron w-100 text-center scoreboard" id="goodJob">
         <h2>GOOD JOB!</h2>
         <form>
           <div class="form-group">
@@ -63,8 +62,17 @@
             />
           </div>
 
-          <button type="submit" class="btn btn-info">Submit</button>
+          <button type="submit" class="btn btn-info submitBtn">Submit</button>
         </form>
+      </div>
+      <!-- Scoreboard/play again screen (Go Back and Clear Scores buttons)-->
+      <div class="hidden jumbotron w-100 text-center" id="scoreBoard">
+        <h3>Scoreboard</h3>
+
+        <button type="button" class="btn btn-info clearScores">
+          Clear Scores
+        </button>
+        <button type="button" class="btn btn-info goBack">Go Back</button>
       </div>
     </div>
 

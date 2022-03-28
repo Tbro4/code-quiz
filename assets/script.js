@@ -9,6 +9,9 @@ var aTwo = $(".answerTwo");
 var aThree = $(".answerThree");
 var aFour = $(".answerFour");
 var startBtn = $(".startBtn");
+var submitBtn = $(".submitBtn");
+var clearScores = $(".clearScores");
+var goBack = $(".goBack");
 var choice;
 
 //array of objects (questions with answers)
@@ -81,12 +84,32 @@ var questions = [
 ];
 
 // console.log(questions);
-function scoreboard() {
+function clearBoard() {}
+
+function startScreen() {}
+
+function displayScoreboard(event) {
+  event.preventDefault();
+  //listen for Clear scores
+  clearScores.on("click", clearBoard);
+
+  //listen for Go Back
+  goBack.on("click", startScreen);
+
+  //hide Enter Initials form
+  $("#goodJob").hide();
+  //show scoreboard
+  $("#scoreBoard").removeClass("hidden");
+}
+//screen to display final score and enter initials
+function initialsScreen() {
   //"ALL DONE!" *Show score *enter initials
+  //listen for submit
+  submitBtn.on("click", displayScoreboard);
   //hide questionCard
   $("div.questionCard").hide();
   //show scoreboard
-  $("#scoreboard").removeClass("hidden");
+  $("#goodJob").removeClass("hidden");
 }
 
 //pops() an object from questions and places the data into Q&A buttons
@@ -94,7 +117,7 @@ function questionAnswerFill() {
   //if questions array is empty, show scoreboard. Else, fill next Q&As
   if (questions.length === 0) {
     console.log("scoreboard time");
-    scoreboard();
+    initialsScreen();
   } else {
     choice = questions.pop();
 
