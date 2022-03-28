@@ -12,6 +12,10 @@ var startBtn = $(".startBtn");
 var submitBtn = $(".submitBtn");
 var clearScores = $(".clearScores");
 var goBack = $(".goBack");
+//a div on scoreboard to display initials
+var initialsEl = $("#initialsEl");
+//dynamically append data to this h2 to display on scoreboard
+var initialsData = $("<h2>");
 var choice;
 
 //array of objects (questions with answers)
@@ -84,12 +88,14 @@ var questions = [
 ];
 
 // console.log(questions);
+//clears scoreboard data
 function clearBoard() {}
 
+//returns to start screen
 function startScreen() {}
 
-function displayScoreboard(event) {
-  event.preventDefault();
+//displays scoreboard
+function displayScoreboard() {
   //listen for Clear scores
   clearScores.on("click", clearBoard);
 
@@ -104,12 +110,20 @@ function displayScoreboard(event) {
 //screen to display final score and enter initials
 function initialsScreen() {
   //"ALL DONE!" *Show score *enter initials
-  //listen for submit
-  submitBtn.on("click", displayScoreboard);
   //hide questionCard
   $("div.questionCard").hide();
   //show scoreboard
   $("#goodJob").removeClass("hidden");
+  //listen for submit
+  submitBtn.on("click", function (event) {
+    event.preventDefault();
+    //saves initials
+    var initials = $("#initials").val();
+    console.log(initials);
+    initialsData.text(initials);
+    initialsEl.append(initialsData);
+    displayScoreboard();
+  });
 }
 
 //pops() an object from questions and places the data into Q&A buttons
