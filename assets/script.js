@@ -10,6 +10,7 @@ var aThree = $(".answerThree");
 var aFour = $(".answerFour");
 var startBtn = $(".startBtn");
 var submitBtn = $(".submitBtn");
+var scoreboardBtn = $(".scoreboardBtn");
 var clearScores = $(".clearScores");
 var goBack = $(".goBack");
 //a div on scoreboard to display initials/scores
@@ -101,6 +102,9 @@ function startScreen() {
 
 //displays scoreboard
 function displayScoreboard() {
+  //hide start page
+  $("#jumboStart").addClass("hidden");
+
   //listen for Clear scores
   clearScores.on("click", clearBoard);
   //listen for Go Back
@@ -223,3 +227,4 @@ function init() {
   $("#questionCard").removeClass("hidden");
 }
 startBtn.on("click", init);
+scoreboardBtn.on("click", displayScoreboard);
