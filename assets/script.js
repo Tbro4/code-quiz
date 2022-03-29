@@ -93,7 +93,9 @@ var questions = [
 function clearBoard() {}
 
 //returns to start screen
-function startScreen() {}
+function startScreen() {
+  document.location.reload();
+}
 
 //displays scoreboard
 function displayScoreboard() {
@@ -102,9 +104,8 @@ function displayScoreboard() {
 
   //listen for Go Back
   goBack.on("click", startScreen);
-
+  //we can use this array to for loop and display scores
   displayArr = JSON.parse(localStorage.getItem("allEntries"));
-
   for (var i = 0; i < displayArr.length; i++) {
     //dynamically append data to this h2 to display on scoreboard
     var initialsData = $("<h2>");
@@ -121,6 +122,7 @@ function displayScoreboard() {
 }
 //screen to display final score and enter initials
 function initialsScreen() {
+  console.log("initials screen");
   //"ALL DONE!" *Show score *enter initials
   //hide questionCard
   $("div.questionCard").hide();
@@ -159,8 +161,9 @@ function questionAnswerFill() {
 }
 
 function init() {
+  console.log("starting");
   //hides start screen
-  $("#jumboStart").hide();
+  $("#jumboStart").addClass("hidden");
 
   //shuffles [questions]
   questions.sort(function () {
