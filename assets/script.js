@@ -14,9 +14,10 @@ var clearScores = $(".clearScores");
 var goBack = $(".goBack");
 //a div on scoreboard to display initials
 var initialsEl = $("#initialsEl");
-//dynamically append data to this h2 to display on scoreboard
-var initialsData = $("<h2>");
+
+// var initialsArr = [];
 var choice;
+var score = 0;
 
 //array of objects (questions with answers)
 var questions = [
@@ -102,6 +103,17 @@ function displayScoreboard() {
   //listen for Go Back
   goBack.on("click", startScreen);
 
+  displayArr = JSON.parse(localStorage.getItem("allEntries"));
+
+  for (var i = 0; i < displayArr.length; i++) {
+    //dynamically append data to this h2 to display on scoreboard
+    var initialsData = $("<h2>");
+    initialsData.text(displayArr[i]);
+    initialsEl.append(initialsData);
+  }
+
+  console.log(displayArr);
+
   //hide Enter Initials form
   $("#goodJob").hide();
   //show scoreboard
@@ -117,11 +129,14 @@ function initialsScreen() {
   //listen for submit
   submitBtn.on("click", function (event) {
     event.preventDefault();
-    //saves initials
-    var initials = $("#initials").val();
-    console.log(initials);
-    initialsData.text(initials);
-    initialsEl.append(initialsData);
+
+    var existingEntries = JSON.parse(localStorage.getItem("allEntries"));
+    if (existingEntries === null) existingEntries = [];
+    var initials = $("#initials").val() + ":  " + score;
+    localStorage.setItem("entry", JSON.stringify(initials));
+    existingEntries.push(initials);
+    localStorage.setItem("allEntries", JSON.stringify(existingEntries));
+
     displayScoreboard();
   });
 }
@@ -159,6 +174,7 @@ function init() {
 
     if (choice.answers.a.value) {
       console.log("true!!");
+      score = score + 10;
       questionAnswerFill();
     } else {
       console.log("false!!");
@@ -171,6 +187,7 @@ function init() {
 
     if (choice.answers.b.value) {
       console.log("true!!");
+      score = score + 10;
       questionAnswerFill();
     } else {
       console.log("false!!");
@@ -183,6 +200,7 @@ function init() {
 
     if (choice.answers.c.value) {
       console.log("true!!");
+      score = score + 10;
       questionAnswerFill();
     } else {
       console.log("false!!");
@@ -195,6 +213,7 @@ function init() {
 
     if (choice.answers.d.value) {
       console.log("true!!");
+      score = score + 10;
       questionAnswerFill();
     } else {
       console.log("false!!");
