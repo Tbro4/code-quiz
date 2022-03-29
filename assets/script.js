@@ -12,10 +12,10 @@ var startBtn = $(".startBtn");
 var submitBtn = $(".submitBtn");
 var clearScores = $(".clearScores");
 var goBack = $(".goBack");
-//a div on scoreboard to display initials
+//a div on scoreboard to display initials/scores
 var initialsEl = $("#initialsEl");
+var finalScore = $("#finalScore");
 
-// var initialsArr = [];
 var choice;
 var score = 0;
 
@@ -88,9 +88,11 @@ var questions = [
   },
 ];
 
-// console.log(questions);
 //clears scoreboard data
-function clearBoard() {}
+function clearBoard() {
+  localStorage.clear();
+  displayScoreboard();
+}
 
 //returns to start screen
 function startScreen() {
@@ -101,20 +103,21 @@ function startScreen() {
 function displayScoreboard() {
   //listen for Clear scores
   clearScores.on("click", clearBoard);
-
   //listen for Go Back
   goBack.on("click", startScreen);
-  //we can use this array to for loop and display scores
+  //we can use this array to loop and display scores
   displayArr = JSON.parse(localStorage.getItem("allEntries"));
-  for (var i = 0; i < displayArr.length; i++) {
-    //dynamically append data to this h2 to display on scoreboard
-    var initialsData = $("<h2>");
-    initialsData.text(displayArr[i]);
-    initialsEl.append(initialsData);
+  //if storage is empty, show empty scoreboard
+  if (displayArr === null) {
+    initialsEl.text("");
+  } else {
+    for (var i = 0; i < displayArr.length; i++) {
+      //dynamically append data to this h2 to display on scoreboard
+      var initialsData = $("<h2>");
+      initialsData.text(displayArr[i]);
+      initialsEl.append(initialsData);
+    }
   }
-
-  console.log(displayArr);
-
   //hide Enter Initials form
   $("#goodJob").hide();
   //show scoreboard
@@ -122,8 +125,10 @@ function displayScoreboard() {
 }
 //screen to display final score and enter initials
 function initialsScreen() {
-  console.log("initials screen");
-  //"ALL DONE!" *Show score *enter initials
+  //"GOOD JOB, Your score was:"
+  var yourScore = $("<h3>");
+  yourScore.text("Your final score was " + score);
+  finalScore.append(yourScore);
   //hide questionCard
   $("div.questionCard").hide();
   //show scoreboard
@@ -147,7 +152,6 @@ function initialsScreen() {
 function questionAnswerFill() {
   //if questions array is empty, show scoreboard. Else, fill next Q&As
   if (questions.length === 0) {
-    console.log("scoreboard time");
     initialsScreen();
   } else {
     choice = questions.pop();
@@ -161,7 +165,6 @@ function questionAnswerFill() {
 }
 
 function init() {
-  console.log("starting");
   //hides start screen
   $("#jumboStart").addClass("hidden");
 
@@ -176,11 +179,9 @@ function init() {
     event.preventDefault();
 
     if (choice.answers.a.value) {
-      console.log("true!!");
       score = score + 10;
       questionAnswerFill();
     } else {
-      console.log("false!!");
       questionAnswerFill();
     }
   });
@@ -189,11 +190,9 @@ function init() {
     event.preventDefault();
 
     if (choice.answers.b.value) {
-      console.log("true!!");
       score = score + 10;
       questionAnswerFill();
     } else {
-      console.log("false!!");
       questionAnswerFill();
     }
   });
@@ -202,11 +201,9 @@ function init() {
     event.preventDefault();
 
     if (choice.answers.c.value) {
-      console.log("true!!");
       score = score + 10;
       questionAnswerFill();
     } else {
-      console.log("false!!");
       questionAnswerFill();
     }
   });
@@ -215,11 +212,9 @@ function init() {
     event.preventDefault();
 
     if (choice.answers.d.value) {
-      console.log("true!!");
       score = score + 10;
       questionAnswerFill();
     } else {
-      console.log("false!!");
       questionAnswerFill();
     }
   });
