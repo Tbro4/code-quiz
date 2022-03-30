@@ -2,6 +2,8 @@
 
 ## A seven-question quiz about music and instruments
 
+[Try it out HERE!](https://tbro4.github.io/code-quiz/)
+
 When loading, user is presented with a start screen. Top left is a button to view the scoreboard (locally stored stats). Top right is a timer displaying 60.
 
 ![Start Screen](./assets/images/Start%20Screen.png)
