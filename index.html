@@ -15,11 +15,17 @@
     <title>Music Quiz</title>
   </head>
   <body>
-    <button type="button" class="btn btn-secondary scoreboardBtn p-4">
+    <!-- scoreboard button (top left screen) -->
+    <button
+      type="button"
+      class="btn btn-secondary scoreboardBtn p-4"
+      id="scoreBtn"
+    >
       ScoreBoard
     </button>
     <div
       class="timerCount border border-info float-right p-4 bg-secondary text-white"
+      id="timerDisplay"
     >
       60
     </div>
@@ -27,7 +33,9 @@
       <!-- start screen -->
       <div class="jumbotron w-100 text-center" id="jumboStart">
         <h3>The Music Quiz!</h3>
-        <p>Test your knowledge of music and instruments</p>
+        <h4>Test your knowledge of music and instruments</h4>
+        <p>Each correct answer is worth 10 points</p>
+        <p>Each incorrect answer will subtract 10 seconds from the clock</p>
         <button type="button" class="btn btn-info startBtn">Start Quiz</button>
       </div>
       <!-- Q&A Screen -->

@@ -2,6 +2,7 @@
 $(".btn").mouseup(function () {
   $(this).blur();
 });
+
 //variables that reference the question and answers(buttons) to populate with object data
 var qText = $(".questionText");
 var aOne = $(".answerOne");
@@ -16,6 +17,8 @@ var goBack = $(".goBack");
 //a div on scoreboard to display initials/scores
 var initialsEl = $("#initialsEl");
 var finalScore = $("#finalScore");
+var scoreBtn = $("#scoreBtn");
+var timerDisplay = $("#timerDisplay");
 
 var choice;
 var timerCount = $(".timerCount");
@@ -105,6 +108,8 @@ function startScreen() {
 
 //displays scoreboard
 function displayScoreboard() {
+  //show scoreboard button
+  $(scoreBtn).show();
   initialsEl.text("");
   //hide start page
   $("#jumboStart").addClass("hidden");
@@ -133,6 +138,7 @@ function displayScoreboard() {
 }
 //screen to display final score and enter initials
 function initialsScreen() {
+  $(timerDisplay).hide();
   //"GOOD JOB, Your score was:"
   var yourScore = $("<h3>");
   yourScore.text("Your final score was " + score);
@@ -174,13 +180,15 @@ function questionAnswerFill() {
 }
 
 function init() {
+  //hide scoreboard button
+  $(scoreBtn).hide();
   secondsLeft = 60;
   //starts timer
   timerInterval = setInterval(function () {
     secondsLeft--;
     timerCount.text(secondsLeft);
 
-    if (secondsLeft === 0) {
+    if (secondsLeft <= 0) {
       clearInterval(timerInterval);
       initialsScreen();
       secondsLeft = 60;
