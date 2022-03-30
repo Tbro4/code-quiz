@@ -18,7 +18,10 @@ var initialsEl = $("#initialsEl");
 var finalScore = $("#finalScore");
 
 var choice;
+var timerCount = $(".timerCount");
+var secondsLeft = 60;
 var score = 0;
+var timerInterval;
 
 //array of objects (questions with answers)
 var questions = [
@@ -102,6 +105,7 @@ function startScreen() {
 
 //displays scoreboard
 function displayScoreboard() {
+  initialsEl.text("");
   //hide start page
   $("#jumboStart").addClass("hidden");
 
@@ -156,6 +160,7 @@ function initialsScreen() {
 function questionAnswerFill() {
   //if questions array is empty, show scoreboard. Else, fill next Q&As
   if (questions.length === 0) {
+    clearInterval(timerInterval);
     initialsScreen();
   } else {
     choice = questions.pop();
@@ -169,6 +174,18 @@ function questionAnswerFill() {
 }
 
 function init() {
+  secondsLeft = 60;
+  //starts timer
+  timerInterval = setInterval(function () {
+    secondsLeft--;
+    timerCount.text(secondsLeft);
+
+    if (secondsLeft === 0) {
+      clearInterval(timerInterval);
+      initialsScreen();
+      secondsLeft = 60;
+    }
+  }, 1000);
   //hides start screen
   $("#jumboStart").addClass("hidden");
 
@@ -186,6 +203,7 @@ function init() {
       score = score + 10;
       questionAnswerFill();
     } else {
+      secondsLeft = secondsLeft - 10;
       questionAnswerFill();
     }
   });
@@ -197,6 +215,7 @@ function init() {
       score = score + 10;
       questionAnswerFill();
     } else {
+      secondsLeft = secondsLeft - 10;
       questionAnswerFill();
     }
   });
@@ -208,6 +227,7 @@ function init() {
       score = score + 10;
       questionAnswerFill();
     } else {
+      secondsLeft = secondsLeft - 10;
       questionAnswerFill();
     }
   });
@@ -219,6 +239,7 @@ function init() {
       score = score + 10;
       questionAnswerFill();
     } else {
+      secondsLeft = secondsLeft - 10;
       questionAnswerFill();
     }
   });
